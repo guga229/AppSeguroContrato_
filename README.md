@@ -121,4 +121,6 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar
 ---
 
 Diagrama
+
+
 <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/92d68426-6120-40ef-b578-d44d12105774" />

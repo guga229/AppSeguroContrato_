@@ -1,6 +1,9 @@
+Absolutely! Here's a polished and professional `README.md` for your **ContratacaoService** project, ready to be dropped into your repository:
+
+```markdown
 # 📄 ContratacaoService
 
-O **ContratacaoService** é um microserviço responsável por gerenciar a contratação de propostas aprovadas no sistema AppSeguros. Ele se comunica com o PropostaService para validar o status da proposta antes de efetivar a contratação.
+O **ContratacaoService** é um microserviço desenvolvido para gerenciar a contratação de propostas aprovadas no sistema AppSeguros. Ele garante que apenas propostas com status **Aprovada** sejam contratadas, validando essa informação diretamente com o PropostaService.
 
 ---
 
@@ -17,67 +20,114 @@ O **ContratacaoService** é um microserviço responsável por gerenciar a contra
 ---
 
 ## 🧱 Arquitetura
-Você colou um conteúdo que tem algumas partes formatadas em Markdown e outras não. Eu vou organizar tudo para que a formatação fique consistente e pronta para usar no seu README.
 
+```
 ContratacaoService
-Api: Camada de apresentação (controllers)
+├── Api           → Camada de apresentação (controllers)
+├── Application   → Regras de negócio e integração com PropostaService
+├── Infrastructure→ Persistência e fila de mensagens
+├── Domain        → Entidades e enums do domínio
+```
 
-Application: Regras de negócio e integração com PropostaService
+---
 
-Infrastructure: Persistência e fila de mensagens
+## 📡 Comunicação com PropostaService
 
-Domain: Entidades e enums do domínio
+Antes de efetivar a contratação, o serviço realiza uma requisição HTTP para validar o status da proposta:
 
-📡 Comunicação com PropostaService
-Antes de contratar uma proposta, o serviço consulta o PropostaService via HTTP para verificar se o status é Aprovada.
-
-HTTP
-
+```http
 GET https://localhost:44340/api/propostas/{id}
-🗄️ Banco de Dados
-Banco: contratacao_db
+```
 
-Tabela principal: Contratos
+A contratação só prossegue se o status retornado for **Aprovada**.
 
-Migrations: gerenciadas via EF Core
+---
 
-📦 Migration inicial
-Bash
+## 🗄️ Banco de Dados
 
+- **Banco**: `contratacao_db`
+- **Tabela principal**: `Contratos`
+- **Migrations**: gerenciadas via EF Core
+
+### Criar Migration Inicial
+
+```bash
 dotnet ef migrations add InitialCreate --project ContratacaoService.Infrastructure --startup-project ContratacaoService.Api
 dotnet ef database update --project ContratacaoService.Infrastructure --startup-project ContratacaoService.Api
-📬 Fila de Mensagens
-O serviço possui uma fila simples em memória (FilaSimples) para processar mensagens assíncronas, como notificações ou disparo de e-mails.
+```
 
-C#
+---
 
+## 📬 Fila de Mensagens
+
+O serviço utiliza uma fila simples em memória (`FilaSimples`) para processar mensagens assíncronas, como notificações e envio de e-mails:
+
+```csharp
 _fila.Enfileirar($"Contrato gerado para proposta {propostaId}");
-📡 Endpoints Principais
-Método	Rota	Descrição
-POST	/api/contratos	Contrata uma proposta aprovada
-GET	/api/contratos	Lista todos os contratos gerados
+```
 
-Exportar para as Planilhas
-🧪 Testes
-Os testes estão localizados em:
+---
 
-/tests/ContratacaoService.UnitTests
+## 📡 Endpoints Principais
 
-/tests/ContratacaoService.IntegrationTests
+| Método | Rota            | Descrição                         |
+|--------|------------------|-----------------------------------|
+| POST   | /api/contratos   | Contrata uma proposta aprovada   |
+| GET    | /api/contratos   | Lista todos os contratos gerados |
 
-Para rodar os testes:
+---
 
-Bash
+## 🧪 Testes
 
+Os testes estão organizados nas seguintes pastas:
+
+- `/tests/ContratacaoService.UnitTests`
+- `/tests/ContratacaoService.IntegrationTests`
+
+### Executar Testes
+
+```bash
 dotnet test
-⚙️ Configuração Local
-1. PostgreSQL
-Certifique-se de que o PostgreSQL está rodando localmente na porta 5432 com o banco contratacao_db criado.
+```
 
-2. Connection String
-No appsettings.json:
+---
 
-JSON
+## ⚙️ Configuração Local
 
+1. **PostgreSQL**  
+   Certifique-se de que o PostgreSQL está rodando localmente na porta `5432` com o banco `contratacao_db` criado.
+
+2. **Connection String**  
+   Configure o `appsettings.json` com a string de conexão:
+
+```json
 "ConnectionStrings": {
-  "DefaultConnection": "Host=localhost;Port=5432;Database=contratacao_db;Username=p
+  "DefaultConnection": "Host=localhost;Port=5432;Database=contratacao_db;Username=postgres;Password=postgres"
+}
+```
+
+---
+
+## 📌 Observações
+
+- O uso de RabbitMQ é opcional e pode ser substituído pela fila em memória para ambientes de desenvolvimento.
+- O serviço está preparado para evoluir com integrações mais robustas e escaláveis.
+
+---
+
+## 🛠️ Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias, correções ou novas funcionalidades.
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob os termos da [MIT License](LICENSE).
+
+---
+
+Feito com 💙 por desenvolvedores apaixonados por arquitetura limpa e microsserviços.
+```
+
+Se quiser, posso também gerar um logo ASCII, badges para GitHub Actions, cobertura de testes, ou até um diagrama de fluxo. Quer deixar esse README ainda mais completo?

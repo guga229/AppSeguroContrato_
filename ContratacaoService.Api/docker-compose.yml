@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  contratacao-api:
+    build:
+      context: .
+      dockerfile: ContratacaoService.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=contratacao_db;Username=postgres;Password=postgres
+
+  postgres:
+    image: postgres:16
+    container_name: contratacao-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: contratacao_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

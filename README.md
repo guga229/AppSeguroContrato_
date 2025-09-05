@@ -1,4 +1,3 @@
-Absolutely! Here's a polished and professional `README.md` for your **ContratacaoService** project, ready to be dropped into your repository:
 
 ```markdown
 # 📄 ContratacaoService
@@ -121,13 +120,3 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar
 
 ---
 
-## 📄 Licença
-
-Este projeto está licenciado sob os termos da [MIT License](LICENSE).
-
----
-
-Feito com 💙 por desenvolvedores apaixonados por arquitetura limpa e microsserviços.
-```
-
-Se quiser, posso também gerar um logo ASCII, badges para GitHub Actions, cobertura de testes, ou até um diagrama de fluxo. Quer deixar esse README ainda mais completo?

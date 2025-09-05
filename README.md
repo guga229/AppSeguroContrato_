@@ -22,9 +22,9 @@ O **ContratacaoService** é um microserviço desenvolvido para gerenciar a contr
 
 ```
 ContratacaoService
-├── Api           → Camada de apresentação (controllers)
+├── Api           → Camada de apresentação (controllers)  e fila de mensagens
 ├── Application   → Regras de negócio e integração com PropostaService
-├── Infrastructure→ Persistência e fila de mensagens
+├── Infrastructure→ Persistência
 ├── Domain        → Entidades e enums do domínio
 ```
 

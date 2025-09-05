@@ -1,5 +1,5 @@
 
-```markdown
+
 # 📄 ContratacaoService
 
 O **ContratacaoService** é um microserviço desenvolvido para gerenciar a contratação de propostas aprovadas no sistema AppSeguros. Ele garante que apenas propostas com status **Aprovada** sejam contratadas, validando essa informação diretamente com o PropostaService.
